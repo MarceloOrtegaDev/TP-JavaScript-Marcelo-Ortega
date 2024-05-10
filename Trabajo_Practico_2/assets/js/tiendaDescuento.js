@@ -6,11 +6,17 @@ let calc = cantidadArt * precio
 let desc = calc * 0.85
 
 switch (true){
-    case calc > 20000 || cantidadArt >= 10:
-        document.write(`El total de su compra con descuento es igual a ${desc}`)
+    case isNaN(cantidadArt) || isNaN(precio):
+        document.write("Porfavor ingrese un valor válido");
         break;
-    case calc > 1 && calc <= 20000:
-        document.write(`El precio de su compra sin descuentos es igual a ${calc}`)
+    case precio < 1 || cantidadArt < 1:
+        document.write("Usted ingreso valores invalidos")
+        break;
+    case cantidadArt > 9 && calc > 20000:
+        document.write(`Su precio con descuento es igual a ${desc}`)
+        break;
+    case cantidadArt < 10:
+        document.write(`El precio de sus articulos es igual a ${calc}`)
         break;
     default:
         document.write("Usted no ingresó valores correctos.")
