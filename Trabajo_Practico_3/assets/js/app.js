@@ -1,12 +1,15 @@
-let tareas = []
+let tareas = [ ]
 let opciones;
 let r = 1;
-const regex = /^\S+$/;
 
-
-function agregarTarea() {
-    tareas.push(prompt("Ingrese la nueva tarea:"))
-    alert("Tarea nueva Añadida \n" + tareas)
+function agregarTarea(nombre) {
+    const regex = /^\S+$/;
+    if(regex.test(nombre)){
+    tareas.push(nombre)
+    alert("Tarea nueva Añadida \n" + nombre)
+    } else{
+    alert("Ingrese un valor sin espacios")
+    }
 }
 
 function listarTareas() {
@@ -17,24 +20,35 @@ function listarTareas() {
     alert(list)
 }
 
-function editarTarea(nombre) {
-    let task = tareas.includes(nombre)
-    if (task == true) {
-        tareas.splice(tareas.indexOf(nombre), 1, prompt("Ingrese el nuevo nombre"))
-    } else {
-        alert("Nombre incorrecto")
+
+function editarTarea(tareas) {
+    const regex = /^\S+$/;
+    let opciones = prompt("Ingrese la posición que quiere editar:")
+    if (regex.test(opciones) && opciones < tareas.length){
+        let nuevaTarea = prompt("Ingrese el nuevo valor de la tarea")
+        if (regex.test(nuevaTarea)){
+            tareas.splice(opciones,1,nuevaTarea)
+            alert("La nueva tarea se llama: "+ nuevaTarea)
+        } else {
+            alert("Ingrese un valor sin espacios")
+        }
+    } else{
+        alert("Ingrese un valor valido")
     }
 
-}   
-
-function eliminarTarea(nombre) {
-    let task = tareas.includes(nombre)
-    if (task == true) {
-        tareas.splice(tareas.indexOf(nombre), 1)
-    } else {
-        alert("Nombre incorrecto")
-    }
 }
+
+function eliminarTarea() {
+    let opcioDel = parseInt(prompt("Ingrese el número de la tarea que quiere eliminar: "+ tareas));
+        if (opcioDel.includes(tareas)){
+            tareas.splice(tareas,1, opcioDel)
+                alert("Tarea eliminada")
+            }else{
+                alert("Ingrese un valor correcto")
+            }
+}
+    
+
 
 
 while (r !== 0) {
@@ -49,16 +63,16 @@ while (r !== 0) {
 
     switch (opciones) {
         case 1:
-            agregarTarea();
+            agregarTarea(prompt("Ingrese el nombre de la tarea:"));
             break;
         case 2:
-            listarTareas();
+            listarTareas(tareas);
             break;
         case 3:
-            editarTarea(prompt("Ingrese el nombre de la tarea que quiere editar"));
+            editarTarea(tareas);
             break;
         case 4:
-            eliminarTarea(prompt("Ingrese el nombre de la tarea que quiere eliminar"));
+            eliminarTarea();
             break;
         case 0:
             r = 0;
